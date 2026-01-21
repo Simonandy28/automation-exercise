@@ -19,20 +19,8 @@ jobs:
         run: black --check . 
 
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.10'
-      - name: "Install dependencies"
-        run: pip install --upgrade pip pytest numpy matplotlib
-      - name: "Run tests"
-        run: python -m pytest
-
-  coverage_report:
-    runs-on: ubuntu-latest
-    steps:
+      runs-on: ubuntu-latest
+      steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
@@ -40,13 +28,29 @@ jobs:
       - name: "Install dependencies"
         run: pip install --upgrade pip pytest pytest numpy matplotlib coverage
       - name: "Run tests with coverage"
-        run: |
-          coverage run -m pytest
-          coverage report
-          coverage xml
-      - name: "Upload artifact"
+        run: coverage run -m pytest
+      - name: "Handover coverage package"
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: ./coverage.xml
+          name: coverage-package
+          path: .coverage
+          retention-days: 1
+
+  coverage-report:  
+      runs-on: ubuntu-latest
+      needs: test
+      steps:
+      - name: "Download coverage report"
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-package
+      - name: "Run coverage report"
+        run: |
+          coverage report
+          coverage xml
+      - name: "Upload coverage report"
+        uses: actions/upload-artifact@v4
+        with:
+          files: ./coverage.xml
           retention-days: 14
+  
