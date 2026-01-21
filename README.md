@@ -9,5 +9,4 @@ The code used in this exercise is based on [Chapter 7 of the book "Learning Scie
 Please check the `LICENSE` file in this repository.
 
 ## Workflow Status Badge
-
-[![Exercise_Workflow](https://github.com/Simonandy28/automation-exercise/actions/workflows/exercise_workflow.yaml/badge.svg)](https://github.com/Simonandy28/automation-exercise/actions/workflows/exercise_workflow.yaml)
+[![SSE CI/CD](https://github.com/Simonandy28/automation-exercise/actions/workflows/exercise_workflow.yaml/badge.svg)](https://github.com/Simonandy28/automation-exercise/actions/workflows/exercise_workflow.yaml)
