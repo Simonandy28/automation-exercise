@@ -1,4 +1,4 @@
-name: Exercise_Workflow
+name: SSE CI/CD
 on: [push]
 jobs:
   style-check:
